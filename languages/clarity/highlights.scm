@@ -1,4 +1,9 @@
-; Comments
+; Tree-sitter highlight queries for Clarity
+; Each rule maps a tree-sitter grammar node to a Zed highlight capture (@name).
+; Zed uses hierarchical resolution: @function.builtin falls back to @function
+; if the theme doesn't define a style for function.builtin.
+
+; Comments — line comments starting with ;;
 (comment) @comment
 
 ; Punctuation
@@ -28,19 +33,20 @@
   (utf8_string_lit)
 ] @string
 
+; Buffers (0xABCD) and principals ('SP..., .contract-name)
 [
   (buffer_lit)
   (standard_principal_lit)
   (contract_principal_lit)
 ] @string.special
 
-; Types
+; Type annotations — e.g. int, uint, bool, principal, (buff 20), <trait-name>
 [
   (native_type)
   (trait_type)
 ] @type
 
-; Keywords — value constructors
+; Value constructor keywords — some, ok, err, none, list
 (some_lit ("some") @keyword)
 (response_lit [
   "ok"
@@ -51,7 +57,7 @@
   (list_lit_token)
 ] @keyword
 
-; Operators
+; Arithmetic, comparison, and logical operators
 [
   "+"
   "-"
@@ -68,7 +74,7 @@
   "xor"
 ] @operator
 
-; Built-in functions
+; Built-in functions — native Clarity functions like map-get?, fold, stx-transfer?, etc.
 (basic_native_form operator: (native_identifier) @function.builtin)
 
 ; Control flow
@@ -76,7 +82,7 @@
   "let"
 ] @keyword
 
-; Definition keywords
+; Top-level definition keywords
 [
   "impl-trait"
   "use-trait"
@@ -91,12 +97,13 @@
   "define-map"
 ] @keyword.definition
 
-; User-defined functions
+; User-defined function names — in definitions and call sites
 (function_signature (identifier) @function.definition)
 (function_signature_for_trait (identifier) @function.definition)
 (contract_function_call operator: (identifier) @function)
 
-; Definition names
+; Names introduced by top-level definitions
+; e.g. MY-CONST in (define-constant MY-CONST u100)
 (constant_definition (identifier) @constant)
 (variable_definition (identifier) @variable)
 (mapping_definition (identifier) @variable)
@@ -105,12 +112,14 @@
 (trait_definition (identifier) @type)
 (trait_usage (identifier) @type)
 
-; Local bindings
+; Local variable bindings inside (let ...)
 (local_binding (identifier) @variable)
 
-; Properties (tuple keys)
+; Tuple field keys — e.g. "name" in { name: "Alice" }
 (tuple_lit key: (identifier) @property)
 
-; Variables
+; Function parameters — e.g. (amount uint) in a function signature
 (function_parameter) @variable.parameter
+
+; Built-in global constants — tx-sender, block-height, stx-liquid-supply, etc.
 (global) @constant.builtin

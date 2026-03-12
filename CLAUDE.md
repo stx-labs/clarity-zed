@@ -31,7 +31,7 @@ This is a minimal Zed extension with two layers:
 **Tree-sitter queries** (`languages/clarity/`):
 - `highlights.scm` — syntax highlighting rules mapping tree-sitter nodes to Zed highlight groups
 - `brackets.scm` — bracket pair definitions for `()`, `{}`, `<>`
-- `outline.scm` — outline/symbol view (tuple keys only)
+- `outline.scm` — outline/symbol view for all top-level definitions and tuple keys
 - `config.toml` — language metadata: file suffix `.clar`, line comments `;; `
 
 **Extension manifest** (`extension.toml`): Declares the extension ID (`clarity`), language server name, and pins the tree-sitter grammar to a specific commit.
@@ -44,3 +44,12 @@ This is a minimal Zed extension with two layers:
 - LSP settings are configurable via Zed's `settings.json` under `lsp.clarity-lsp.initialization_options`
 - The extension depends on `clarinet` being installed externally; it does not bundle the LSP server
 - `extension.wasm` at the repo root is the pre-built extension artifact (also gitignored)
+
+## Editing Tree-sitter Queries
+
+When editing `.scm` files, keep these in mind:
+- Available highlight captures are documented at https://zed.dev/docs/extensions/languages#syntax-highlighting
+- Zed uses hierarchical capture resolution: `@function.builtin` falls back to `@function` if the theme doesn't style the more specific name
+- The node types available for matching come from the tree-sitter-clarity grammar (`grammar.js` in the pinned repo). To see what nodes exist, read that file
+- The grammar commit in `extension.toml` must match the grammar the queries are written against — updating the grammar may add/remove/rename nodes
+- Clarity language reference: functions at https://docs.stacks.co/reference/clarity/functions, keywords at https://docs.stacks.co/reference/clarity/keywords, types at https://docs.stacks.co/reference/clarity/types

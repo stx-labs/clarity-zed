@@ -96,6 +96,18 @@
 (function_signature_for_trait (identifier) @function.definition)
 (contract_function_call operator: (identifier) @function)
 
+; Definition names
+(constant_definition (identifier) @constant)
+(variable_definition (identifier) @variable)
+(mapping_definition (identifier) @variable)
+(fungible_token_definition (identifier) @type)
+(non_fungible_token_definition (identifier) @type)
+(trait_definition (identifier) @type)
+(trait_usage (identifier) @type)
+
+; Local bindings
+(local_binding (identifier) @variable)
+
 ; Properties (tuple keys)
 (tuple_lit key: (identifier) @property)
 

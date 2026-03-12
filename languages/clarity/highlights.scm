@@ -71,6 +71,7 @@
   ">="
   "and"
   "or"
+  "not"
   "xor"
 ] @operator
 
@@ -115,8 +116,10 @@
 ; Local variable bindings inside (let ...)
 (local_binding (identifier) @variable)
 
-; Tuple field keys — e.g. "name" in { name: "Alice" }
+; Tuple field keys — e.g. "name" in { name: "Alice" } or { name: (string-ascii 50) }
 (tuple_lit key: (identifier) @property)
+(tuple_type key: (identifier) @property)
+(tuple_type_for_trait key: (identifier) @property)
 
 ; Function parameters — e.g. (amount uint) in a function signature
 (function_parameter) @variable.parameter

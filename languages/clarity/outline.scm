@@ -17,3 +17,4 @@
 (fungible_token_definition (identifier) @name)
 (non_fungible_token_definition (identifier) @name)
 (trait_definition (identifier) @name)
+(trait_usage (identifier) @name)

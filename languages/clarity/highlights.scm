@@ -40,7 +40,7 @@
   (trait_type)
 ] @type
 
-; Keywords
+; Keywords — value constructors
 (some_lit ("some") @keyword)
 (response_lit [
   "ok"
@@ -51,6 +51,7 @@
   (list_lit_token)
 ] @keyword
 
+; Operators
 [
   "+"
   "-"
@@ -65,20 +66,17 @@
   "and"
   "or"
   "xor"
-] @keyword.operator
+] @operator
 
-; Functions
-; Use different captures for user-defined functions and built-in functions
-(function_signature (identifier) @function)
-(function_signature_for_trait (identifier) @function)
-(contract_function_call operator: (identifier) @function)
+; Built-in functions
+(basic_native_form operator: (native_identifier) @function.builtin)
 
-(basic_native_form operator: (native_identifier) @label)
+; Control flow
 [
   "let"
-] @label
+] @keyword
 
-; Top-level declarations
+; Definition keywords
 [
   "impl-trait"
   "use-trait"
@@ -91,8 +89,16 @@
   "define-non-fungible-token"
   "define-constant"
   "define-map"
-] @preproc
+] @keyword.definition
+
+; User-defined functions
+(function_signature (identifier) @function.definition)
+(function_signature_for_trait (identifier) @function.definition)
+(contract_function_call operator: (identifier) @function)
+
+; Properties (tuple keys)
+(tuple_lit key: (identifier) @property)
 
 ; Variables
-(function_parameter) @variable
-(global) @variable.special
+(function_parameter) @variable.parameter
+(global) @constant.builtin

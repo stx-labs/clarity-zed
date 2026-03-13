@@ -1,6 +1,6 @@
 id = "clarity"
 name = "Clarity"
-version = "0.0.1"
+version = "0.1.0"
 schema_version = 1
 authors = ["Hugo <hugo@hiro.so>"]
 description = "Clarity language support"

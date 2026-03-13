@@ -30,6 +30,7 @@ This is a minimal Zed extension with two layers:
 
 **Tree-sitter queries** (`languages/clarity/`):
 - `highlights.scm` — syntax highlighting rules mapping tree-sitter nodes to Zed highlight groups
+- `indents.scm` — auto-indentation rules for `()` and `{}` forms
 - `brackets.scm` — bracket pair definitions for `()`, `{}`, `<>`
 - `outline.scm` — outline/symbol view for all top-level definitions and tuple keys
 - `config.toml` — language metadata: file suffix `.clar`, line comments `;; `

@@ -12,4 +12,4 @@ language = "Clarity"
 
 [grammars.clarity]
 repository = "https://github.com/xlittlerag/tree-sitter-clarity"
-commit = "cbb3ffe8688aca558286fd45ed46857a1f3207bb"
+commit = "1436da3946359fcd7ac2d81917aaa78ef1e01755"

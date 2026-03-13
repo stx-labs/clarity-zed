@@ -29,3 +29,23 @@ The LSP behavior can be customized by adding the following JSON to Zed's `settin
   }
 },
 ```
+
+## Architecture
+
+This is a minimal Zed extension with two layers:
+
+**Rust WASM extension** (`src/lib.rs`): Implements `zed::Extension` trait. Does two things:
+1. `language_server_command`: Locates the `clarinet` binary and runs it with `lsp` arg
+2. `language_server_initialization_options`: Passes user LSP settings from Zed's `settings.json` through to the Clarity LSP
+
+**Tree-sitter queries** (`languages/clarity/`):
+- `highlights.scm`: Syntax highlighting rules mapping tree-sitter nodes to Zed highlight groups
+- `indents.scm`: Auto-indentation rules for `()` and `{}` forms
+- `brackets.scm`: Bracket pair definitions for `()`, `{}`, `<>`
+- `outline.scm`: Outline/symbol view for all top-level definitions and tuple keys
+- `config.toml`: Language metadata: file suffix `.clar`, line comments `;; `
+
+**Extension manifest** (`extension.toml`): Declares the extension ID (`clarity`), language server name, and pins the tree-sitter grammar to a specific commit.
+
+**Grammar** (`grammars/`): Pre-built `clarity.wasm` tree-sitter parser. Sourced from the commit pinned in `extension.toml`. This directory is gitignored — the wasm is built/fetched by Zed at install time.
+

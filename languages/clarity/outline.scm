@@ -1,20 +1,49 @@
 ; Outline queries for Clarity
-; Patterns matched with @name appear in Zed's symbol outline panel
+; Patterns matched with @name and @item appear in Zed's symbol outline panel
 ; and breadcrumb bar, enabling quick navigation via Cmd+Shift+O.
-
-; Tuple field keys in literals and type annotations
-(tuple_lit key: (identifier) @name)
-(tuple_type key: (identifier) @name)
-(tuple_type_for_trait key: (identifier) @name)
+; @item (required) marks the full node range; @name (required) is the display text.
+; @context (optional) adds keyword prefixes like "define-public" to the label.
 
 ; Function definitions
-(function_signature (identifier) @name)
+(private_function
+  "define-private" @context
+  (function_signature (identifier) @name)) @item
 
-; Top-level definitions — constants, variables, maps, tokens, traits
-(constant_definition (identifier) @name)
-(variable_definition (identifier) @name)
-(mapping_definition (identifier) @name)
-(fungible_token_definition (identifier) @name)
-(non_fungible_token_definition (identifier) @name)
-(trait_definition (identifier) @name)
-(trait_usage (identifier) @name)
+(read_only_function
+  "define-read-only" @context
+  (function_signature (identifier) @name)) @item
+
+(public_function
+  "define-public" @context
+  (function_signature (identifier) @name)) @item
+
+; Constants, variables, and maps
+(constant_definition
+  "define-constant" @context
+  (identifier) @name) @item
+
+(variable_definition
+  "define-data-var" @context
+  (identifier) @name) @item
+
+(mapping_definition
+  "define-map" @context
+  (identifier) @name) @item
+
+; Token definitions
+(fungible_token_definition
+  "define-fungible-token" @context
+  (identifier) @name) @item
+
+(non_fungible_token_definition
+  "define-non-fungible-token" @context
+  (identifier) @name) @item
+
+; Trait definitions and usage
+(trait_definition
+  "define-trait" @context
+  (identifier) @name) @item
+
+(trait_usage
+  "use-trait" @context
+  (identifier) @name) @item

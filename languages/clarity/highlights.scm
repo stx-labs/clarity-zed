@@ -47,7 +47,7 @@
 ] @type
 
 ; Value constructor keywords — some, ok, err, none, list
-(some_lit ("some") @keyword)
+(some_lit "some" @keyword)
 (response_lit [
   "ok"
   "err"
@@ -122,7 +122,7 @@
 (tuple_type_for_trait key: (identifier) @property)
 
 ; Function parameters — e.g. (amount uint) in a function signature
-(function_parameter) @variable.parameter
+(function_parameter (identifier) @variable.parameter)
 
 ; Built-in global constants — tx-sender, block-height, stx-liquid-supply, etc.
 (global) @constant.builtin

@@ -20,7 +20,7 @@ impl zed::Extension for ClarityExtension {
                 args: vec!["lsp".into()],
                 env: vec![],
             }),
-            None => Err("Could not find 'clarinet' binary in PATH. Install from https://github.com/hirosystems/clarinet".into()),
+            None => Err("Could not find 'clarinet' binary in PATH. Install from https://github.com/stx-labs/clarinet".into()),
         }
     }
 

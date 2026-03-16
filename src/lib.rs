@@ -20,7 +20,7 @@ impl zed::Extension for ClarityExtension {
                 args: vec!["lsp".into()],
                 env: vec![],
             }),
-            None => Err("Unable to find lsp from worktree".into()),
+            None => Err("Could not find 'clarinet' binary in PATH. Install from https://github.com/stx-labs/clarinet".into()),
         }
     }
 

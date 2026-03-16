@@ -2,3 +2,9 @@ name = "Clarity"
 grammar = "clarity"
 path_suffixes = ["clar"]
 line_comments = [";; "]
+tab_size = 2
+word_characters = [
+  "-",
+  "!",
+  "?",
+]

@@ -4,7 +4,7 @@ version = "0.1.0"
 schema_version = 1
 authors = ["Hugo <hugo@hiro.so>"]
 description = "Clarity language support"
-repository = "https://github.com/hirosystems/clarity-zed"
+repository = "https://github.com/stx-labs/clarity-zed"
 
 [language_servers.clarity-lsp]
 name = "Clarity Language Server"

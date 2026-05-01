@@ -24,6 +24,7 @@ The LSP behavior can be customized by adding the following JSON to Zed's `settin
       "goToDefinition": true,
       "hover": true,
       "signatureHelp": true,
+      "staticCostAnalysis": false,
       "debugLogging": false
     }
   }
@@ -48,4 +49,3 @@ This is a minimal Zed extension with two layers:
 **Extension manifest** (`extension.toml`): Declares the extension ID (`clarity`), language server name, and pins the tree-sitter grammar to a specific commit.
 
 **Grammar** (`grammars/`): Pre-built `clarity.wasm` tree-sitter parser. Sourced from the commit pinned in `extension.toml`. This directory is gitignored — the wasm is built/fetched by Zed at install time.
-
